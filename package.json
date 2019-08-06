@@ -1,0 +1,17 @@
+{
+  "name": "graph_generator",
+  "version": "1.0.0",
+  "description": "create graph on GUI then convert into array",
+  "author": "sirogane1013",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
+}
