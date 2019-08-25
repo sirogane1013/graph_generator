@@ -6,7 +6,7 @@ export const state = () => ({
     $_uniqueId: 0,
 });
 
-export const getter = {
+export const getters = {
     getNodeById: (state) => (id) => {
         return state.list.find(node => node.id === id)
     }

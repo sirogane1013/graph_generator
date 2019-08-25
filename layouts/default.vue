@@ -3,6 +3,7 @@
         <div class="contents">
             <nuxt/>
             <button-node-remove />
+            <button-edge-add />
         </div>
         <div class="sidebar">
             <button-node-add />
@@ -11,11 +12,13 @@
 </template>
 
 <script>
+    import ButtonEdgeAdd from "~/components/button/EdgeAdd"
     import ButtonNodeAdd from "~/components/button/NodeAdd"
     import ButtonNodeRemove from "~/components/button/NodeRemove"
 
     export default {
         components: {
+            ButtonEdgeAdd,
             ButtonNodeAdd,
             ButtonNodeRemove,
         },

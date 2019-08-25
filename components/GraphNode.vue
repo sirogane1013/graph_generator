@@ -1,5 +1,4 @@
 <template>
-    <!--suppress HtmlUnknownTag -->
     <g
             fill="#ffffff"
             :width="radius*4"
@@ -14,21 +13,28 @@
                 @mouseover="onMouseOver"
                 @mousedown="onMouseDown"
                 @mouseup="onMouseUp"
+                @click="onClick"
         >
         </circle>
     </g>
 </template>
 
 <script>
-    // noinspection NpmUsedModulesInstalled
     import { mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
 
     export default {
-        name: "CircleNode",
+        name: "GraphNode",
         computed: {
-            ...mapState({
-                radius: state => state.nodes.size,
+            ...mapState("nodes", {
+                radius: "size",
             }),
+            ...mapState("edges", [
+                "isEdgeAddMode",
+            ]),
+            self() {
+                return this.$store.getters['nodes/getNodeById'](this.id);
+            },
         },
         props: {
             id: {
@@ -61,6 +67,13 @@
             onMouseUp() {
                 document.removeEventListener("mousemove", this.onMouseMove);
             },
+            onClick() {
+                if (this.isEdgeAddMode) {
+                    this.$store.commit('edges/setEndPoint2', this.self);
+                    this.$store.commit('edges/create');
+                    this.$store.commit('edges/endAdding');
+                }
+            }
         }
     }
 </script>

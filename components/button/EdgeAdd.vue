@@ -3,20 +3,19 @@
             :style="{
                 position: 'absolute',
                 display: this.isHovering ? 'block' : 'none',
-                top: this.hoveredNode.y+this.size+'px',
+                top: this.hoveredNode.y+this.size+30+'px',
                 left: this.hoveredNode.x+this.size+'px',
             }"
-            @click="removeHoveredNode">
-        ノードを削除
+            @click="addEdge">
+        エッジを追加
     </button>
 </template>
 
 <script>
     import { mapState } from 'vuex'
-    import { mapMutations } from 'vuex'
 
     export default {
-        name: "NodeRemove",
+        name: "EdgeAdd",
         computed: {
             ...mapState("nodes", [
                 "isHovering",
@@ -25,9 +24,9 @@
             ]),
         },
         methods: {
-            removeHoveredNode() {
-                this.$store.commit('nodes/remove', this.hoveredNode);
-                this.$store.commit('nodes/unhoverNode');
+            addEdge() {
+                this.$store.commit('edges/startAdding');
+                this.$store.commit('edges/setEndPoint1', this.hoveredNode);
             },
         }
     }
