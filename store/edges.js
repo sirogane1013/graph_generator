@@ -26,4 +26,9 @@ export const mutations = {
             endPoint2: state.endPoint2,
         });
     },
+    removeNodeRelatedEdge(state, node) {
+        state.list = state.list.filter((edge) => {
+            return !(edge.endPoint1 === node || edge.endPoint2 === node);
+        })
+    },
 };

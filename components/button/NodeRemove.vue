@@ -27,6 +27,7 @@
         methods: {
             removeHoveredNode() {
                 this.$store.commit('nodes/remove', this.hoveredNode);
+                this.$store.commit('edges/removeNodeRelatedEdge', this.hoveredNode);
                 this.$store.commit('nodes/unhoverNode');
             },
         }
