@@ -2,7 +2,6 @@
     <svg-canvas>
         <graph-edge
                 v-for="(edge, index) in this.edgeList" :key="`edge-${index}`"
-                :id = edge.id
                 :x1 = edge.endPoint1.x
                 :y1 = edge.endPoint1.y
                 :x2 = edge.endPoint2.x

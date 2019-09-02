@@ -22,10 +22,6 @@
         computed: {
         },
         props: {
-            id: {
-                type: Number,
-                required: true,
-            },
             x1: {
                 type: Number,
                 required: true,

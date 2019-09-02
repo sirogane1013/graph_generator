@@ -7,6 +7,7 @@
         </div>
         <div class="sidebar">
             <button-node-add />
+            <button-matrix-generate />
         </div>
     </div>
 </template>
@@ -15,12 +16,14 @@
     import ButtonEdgeAdd from "~/components/button/EdgeAdd"
     import ButtonNodeAdd from "~/components/button/NodeAdd"
     import ButtonNodeRemove from "~/components/button/NodeRemove"
+    import ButtonMatrixGenerate from "~/components/button/MatrixGenerate"
 
     export default {
         components: {
             ButtonEdgeAdd,
             ButtonNodeAdd,
             ButtonNodeRemove,
+            ButtonMatrixGenerate,
         },
     }
 </script>

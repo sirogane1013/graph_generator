@@ -9,21 +9,32 @@ export const state = () => ({
 export const getters = {
     getNodeById: (state) => (id) => {
         return state.list.find(node => node.id === id)
-    }
+    },
+    getAdjacencyMatrix(state, getters, rootState, rootGetters) {
+        const edges = rootGetters['edges/getList'];
+        const matrix = [...Array(state.list.length)].map(() => Array(state.list.length).fill(0)); // initialize adjacency matrix
+        for (const edge of edges) {
+            const index1 = state.list.indexOf(edge.endPoint1);
+            const index2 = state.list.indexOf(edge.endPoint2);
+            matrix[index1][index2] = 1;
+            matrix[index2][index1] = 1;
+        }
+        return matrix;
+    },
 };
 
 export const mutations = {
-    add(state, position) {
+    add(state, {x, y}) {
         state.list.push({
             id: state.$_uniqueId++,
-            x: position.x,
-            y: position.y,
+            x: x,
+            y: y,
         })
     },
-    moveNode(state, payload) {
-        const node = state.list.find(node => node.id === payload.id);
-        node.x = payload.x;
-        node.y = payload.y;
+    moveNode(state, {id, x, y}) {
+        const node = state.list.find(node => node.id === id);
+        node.x = x;
+        node.y = y;
     },
     hoverNode(state, id) {
         state.hoveredNode = state.list.find(node => node.id === id);

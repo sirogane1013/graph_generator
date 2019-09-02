@@ -3,8 +3,13 @@ export const state = () => ({
     isEdgeAddMode: false,
     endPoint1: {},
     endPoint2: {},
-    $_uniqueId: 0,
 });
+
+export const getters = {
+    getList (state) {
+        return state.list;
+    }
+};
 
 export const mutations = {
     startAdding(state) {
@@ -20,11 +25,19 @@ export const mutations = {
         state.endPoint2 = node;
     },
     create(state) {
-        state.list.push({
-            id: state.$_uniqueId++,
-            endPoint1: state.endPoint1,
-            endPoint2: state.endPoint2,
-        });
+        const isEdgeExist = (() => {
+            const foundNode = state.list.find((edge) => {
+                return    (edge.endPoint1 === state.endPoint1 && edge.endPoint2 === state.endPoint2)
+                       || (edge.endPoint1 === state.endPoint2 && edge.endPoint2 === state.endPoint1);
+            });
+            return typeof foundNode !== "undefined";
+        })();
+        if (!isEdgeExist) {
+            state.list.push({
+                endPoint1: state.endPoint1,
+                endPoint2: state.endPoint2
+            });
+        }
     },
     removeNodeRelatedEdge(state, node) {
         state.list = state.list.filter((edge) => {
